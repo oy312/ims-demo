@@ -2,6 +2,8 @@
 // Heat map + Perlin Noise https://codepen.io/ysko909/pen/ExKLqYq 
 // パーリンノイズ生成の準備
 
+//How can i track the colors on the camera to reflect heat more? 
+
 const NOISE_VALUE = 80;
 const CELL_SIZE = 10;
 let zSeed = 0;
@@ -12,6 +14,7 @@ const MIN_SATURATION = 60;
 let speedVal_sat = 0;
 let addVal_sat = 1;
 
+
 // Brightness（明度）
 const MAX_BRIGHTNESS = 100;
 const MIN_BRIGHTNESS = 50;
@@ -20,17 +23,19 @@ let addVal_bright = 1;
 
 //Camera
 let capture;
-capture = createCapture(VIDEO);
 
 function setup() {
   createCanvas(800, 600);
   colorMode(HSB);
   background(255);
   noStroke();
+  capture = createCapture(VIDEO);
+ 
   
 }
 
 function draw() {
+  
   for (let y = 0; y*CELL_SIZE < height;y++) {
     for (let x = 0; x*CELL_SIZE < width; x++){
       
@@ -64,5 +69,7 @@ function draw() {
   speedVal_bright += addVal_bright;
   image(capture, 0, 0, 800, 600);
   blendMode(DIFFERENCE);
+ // filter(BLUR);
+
 
 }
